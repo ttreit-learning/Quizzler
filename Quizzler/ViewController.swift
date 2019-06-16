@@ -33,7 +33,13 @@ class ViewController: UIViewController {
             pickedAnswer = false
         }
         checkAnswer()
-  
+        if questionNumber < allQuestions.list.count {
+        questionNumber += 1
+        questionLabel.text = allQuestions.list[questionNumber].questionText
+        } else {
+   
+        }
+        
     }
     
     func updateUI() {
