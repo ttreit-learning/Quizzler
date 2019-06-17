@@ -22,8 +22,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       let firstQuestion = allQuestions.list[questionNumber]
-        questionLabel.text = firstQuestion.questionText
+      nextQuestion()
     }
 
     @IBAction func answerPressed(_ sender: AnyObject) {
@@ -33,21 +32,30 @@ class ViewController: UIViewController {
             pickedAnswer = false
         }
         checkAnswer()
-        if questionNumber < allQuestions.list.count {
         questionNumber += 1
-        questionLabel.text = allQuestions.list[questionNumber].questionText
-        } else {
-   
-        }
-        
+        nextQuestion()
+  
     }
     
     func updateUI() {
-      
+
     }
     
 
     func nextQuestion() {
+        if questionNumber < allQuestions.list.count {
+            questionLabel.text = allQuestions.list[questionNumber].questionText
+        } else {
+            let quizFinished = UIAlertController(title: "Quizzer", message: "You Finished the Quiz!", preferredStyle: .alert)
+            
+            let restartQuiz = UIAlertAction(title: "Restart", style: .default, handler: { (UIAlertAction) in
+                self.startOver()
+                
+            })
+            
+            quizFinished.addAction((restartQuiz))
+            present(quizFinished, animated: true)
+        }
         
     }
     
@@ -63,7 +71,8 @@ class ViewController: UIViewController {
     
     
     func startOver() {
-       
+       questionNumber = 0
+        nextQuestion()
     }
     
 
