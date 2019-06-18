@@ -44,7 +44,6 @@ class ViewController: UIViewController {
         }
         
         scoreLabel.text = "Score: \(questionsCorrect)"
-        print(scoreLabel.text)
         progressBar.frame.size.width = (view.frame.size.width / CGFloat(allQuestions.list.count)) * CGFloat(questionNumber)
 
     }
@@ -70,16 +69,16 @@ class ViewController: UIViewController {
     func checkAnswer() {
         let correctAnswer = allQuestions.list[questionNumber].answer
         if correctAnswer == pickedAnswer {
-            print("Correct! You got it.")
+            ProgressHUD.showSuccess("Correct!")
             questionsCorrect += 1
         } else {
-            print("Wrong!")
+            ProgressHUD.showError("Incorrect")
         }
     }
     
     
     func startOver() {
-       questionNumber = 0
+        questionNumber = 0
         questionsCorrect = 0
         nextQuestion()
     }
